@@ -1,4 +1,14 @@
-<app-tabla-alumnos  *ngIf="!cursos"></app-tabla-alumnos>
-<app-tabla-cursos *ngIf="cursos"></app-tabla-cursos>
+<section class="container mt-5">
+  <div *ngIf="cursos">
+    <h1 class="text-center">Lista de Cursos</h1>
+    <app-tabla-cursos></app-tabla-cursos>
+  </div>
+  <div *ngIf="!cursos">
+    <h1 class="text-center">Lista de Alumnos</h1>
+    <app-tabla-alumnos *ngIf="!cursos"></app-tabla-alumnos>
+  </div>
+</section>
 
-<button class="btn btn-primary" (click)="handleChange()">change curso</button>
+<button class="btn btn-primary m-5" (click)="handleChange()">
+  {{ cursos ? 'Ver Alumnos' : 'Ver Cursos' }}
+</button>

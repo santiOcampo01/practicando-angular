@@ -1,1 +1,41 @@
-<p>tabla-cursos works!</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Fecha Inicio</th>
+      <th>Fecha Fin</th>
+      <th>Profesor</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let curso of cursos">
+      <td>{{ curso.id }}</td>
+      <td>{{ curso.nombre }}</td>
+      <td>{{ curso.descripcion }}</td>
+      <td>{{ curso.fechaInicio | date }}</td>
+      <td>{{ curso.fechaFin | date }}</td>
+      <td>{{ curso.profesor }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="editarCurso(curso.id)">Editar</button>
+        <button class="btn btn-danger" (click)="eliminarCurso(curso.id)">Eliminar</button>
+      </td>
+    </tr>
+
+    <tr *ngIf="addCurso" [formGroup]="cursoForm">
+      <td>#</td>
+      <td><input class="form-control" formControlName="nombre" placeholder="Nombre" /></td>
+      <td><input class="form-control" formControlName="descripcion" placeholder="Descripción" /></td>
+      <td><input class="form-control" type="date" formControlName="fechaInicio" /></td>
+      <td><input class="form-control" type="date" formControlName="fechaFin" /></td>
+      <td><input class="form-control" formControlName="profesor" placeholder="Profesor" /></td>
+      <td><button class="btn btn-success" (click)="agregarCurso()">Añadir</button></td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-primary mt-2" (click)="handleAgregarCurso()">
+  {{ addCurso ? 'Cancelar' : 'Añadir un curso' }}
+</button>
+

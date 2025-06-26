@@ -1,1 +1,38 @@
-<p>tabla-alumnos works!</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Fecha Nacimiento</th>
+      <th>Carrera</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let estudiante of estudiantes">
+      <td>{{ estudiante.id }}</td>
+      <td>{{ estudiante.nombre }}</td>
+      <td>{{ estudiante.correo }}</td>
+      <td>{{ estudiante.fechaNacimiento | date }}</td>
+      <td>{{ estudiante.carrera }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="editarEstudiante(estudiante.id)">Editar</button>
+        <button class="btn btn-danger" (click)="eliminarEstudiante(estudiante.id)">Eliminar</button>
+      </td>
+    </tr>
+
+    <tr *ngIf="addEstudiante" [formGroup]="estudianteForm">
+      <td>#</td>
+      <td><input class="form-control" formControlName="nombre" placeholder="Nombre" /></td>
+      <td><input class="form-control" formControlName="correo" placeholder="Correo" /></td>
+      <td><input class="form-control" type="date" formControlName="fechaNacimiento" /></td>
+      <td><input class="form-control" formControlName="carrera" placeholder="Carrera" /></td>
+      <td><button class="btn btn-success" (click)="agregarEstudiante()">Añadir</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary mt-2" (click)="toggleFormularioEstudiante()">
+  {{ addEstudiante ? 'Cancelar' : 'Añadir estudiante' }}
+</button>
